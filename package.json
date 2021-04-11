@@ -1,0 +1,19 @@
+{
+  "name": "frida-agent-example",
+  "version": "1.0.0",
+  "description": "Example Frida agent written in TypeScript",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "frida-compile src/index.ts -o dist/swift-frida.js -c",
+    "watch": "frida-compile src/index.ts -o dist/swift-frida.js -w",
+    "watch-example": "frida-compile examples/index.ts -o dist/examples.js -w",
+    "attach-example": "frida -U TestSwiftUI -l ./dist/examples.js"
+  },
+  "devDependencies": {
+    "@types/frida-gum": "^16.4.1",
+    "@types/node": "^14.14.10",
+    "frida-compile": "^10.0.0"
+  }
+}
