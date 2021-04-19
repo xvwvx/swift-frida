@@ -22,3 +22,11 @@ export enum MetadataKind {
     Job = 3 | MetadataKindIsNonType | MetadataKindIsRuntimePrivate,
     LastEnumerated = 0x7FF,
 }
+
+export function toMetadataKind(ptr: NativePointer): MetadataKind {
+    let kind: MetadataKind = (ptr.readLong() as Int64).toNumber()
+    if (MetadataKind[kind] === undefined) {
+        return MetadataKind.Class
+    }
+    return kind
+}

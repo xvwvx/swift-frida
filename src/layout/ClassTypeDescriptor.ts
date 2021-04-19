@@ -1,9 +1,9 @@
-import {ContextDescriptorFlags, TypeDescriptor} from "./TypeDescriptor";
+import {TypeDescriptor} from "./TypeDescriptor";
 import {TargetTypeGenericContextDescriptorHeader} from "./TargetTypeGenericContextDescriptorHeader";
 
 
 export class ClassTypeDescriptor extends TypeDescriptor {
-    readonly flags: ContextDescriptorFlags;
+    readonly flags: number;
     readonly parent: number
     readonly mangledName: NativePointer;
     readonly fieldTypesAccessor: NativePointer
@@ -18,7 +18,7 @@ export class ClassTypeDescriptor extends TypeDescriptor {
 
     constructor(ptr: NativePointer) {
         super(ptr)
-        this.flags = new ContextDescriptorFlags(ptr.readU32())
+        this.flags = ptr.readU32()
         this.parent = ptr.add(4).readS32()
         this.mangledName = ptr.add(8).readRelativeVectorPointer()
         this.fieldTypesAccessor = ptr.add(12).readRelativeVectorPointer()

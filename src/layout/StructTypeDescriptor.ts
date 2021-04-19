@@ -1,9 +1,9 @@
 import "../extensions"
 import {TargetTypeGenericContextDescriptorHeader} from "./TargetTypeGenericContextDescriptorHeader";
-import {ContextDescriptorFlags, TypeDescriptor} from "./TypeDescriptor";
+import {TypeDescriptor} from "./TypeDescriptor";
 
 export class StructTypeDescriptor extends TypeDescriptor {
-    readonly flags: ContextDescriptorFlags;
+    readonly flags: number;
     readonly parent: number
     readonly mangledName: NativePointer;
     readonly accessFunctionPtr: NativePointer
@@ -14,8 +14,8 @@ export class StructTypeDescriptor extends TypeDescriptor {
 
     constructor(ptr: NativePointer) {
         super(ptr)
-        this.flags = new ContextDescriptorFlags(ptr.readU32())
-        this.parent = 0
+        this.flags = ptr.readU32()
+        this.parent = ptr.readS32()
         this.mangledName = ptr.add(8).readRelativeVectorPointer()
         this.accessFunctionPtr = ptr.add(12).readRelativeVectorPointer()
         this.fieldDescriptor = ptr.add(16).readRelativeVectorPointer()

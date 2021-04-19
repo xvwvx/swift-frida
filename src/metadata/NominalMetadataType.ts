@@ -6,10 +6,12 @@ import {PropertyInfo} from "../model/PropertyInfo";
 
 export class NominalMetadataType<Layout extends NominalMetadataLayoutType<TypeDescriptor>>
     extends MetadataType<Layout> {
-    genericArgumentOffset = 2
+    get genericArgumentOffset() {
+        return 2
+    }
 
     get isGeneric(): boolean {
-        return this.layout.typeDescriptor.flags.isGeneric
+        return (this.layout.typeDescriptor.flags & 0x80) != 0
     }
 
     get mangledName(): string {

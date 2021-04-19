@@ -42,7 +42,7 @@ export class ContextDescriptorFlags {
 }
 
 export interface TypeDescriptor {
-    flags: ContextDescriptorFlags
+    flags: number
     mangledName: NativePointer
     fieldDescriptor: NativePointer
     numberOfFields: number
